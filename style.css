@@ -1,0 +1,35 @@
+.weatherBg{
+    background-color: lightblue;
+	margin-top: 45px;
+	text-align: center;
+}
+.weatherBck{
+background-color: lightgray;
+	margin-top: 45px;
+	text-align: center;
+
+}
+.inner-wrap{
+margin-top: 45px;
+}
+
+.newsBg{
+	background-color: cornsilk;
+	    padding: 5px 5px;
+}
+.marginTopForDiv{
+	    margin-top: 4%;
+}
+
+.firstCity , .secondCity{
+	display: inline-block;
+	text-align: center;
+}
+
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px) {
+	.firstCity {
+		margin-bottom:10%;
+	}
+}

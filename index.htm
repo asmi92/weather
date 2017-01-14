@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Weather App</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body ng-app="weatherApp">
+  <div ng-controller="WeatherCtrl">
+	
+	<div class="container">
+			<div class="off-canvas-wrap" data-offcanvas>
+				<div class="inner-wrap">
+					<nav class="tab-bar">
+
+						<section class="middle tab-bar-section">
+							<h1> The Weather App </h1>
+						</section>
+					</nav>
+					<div class="row marginTopForDiv">	
+					<div class="firstCity col-xl-6 col-lg-6 col-sm-6 col-md-6">
+					Enter City  <input type="text" ng-model="cityName" ng-change="searchForCityWeather(cityName)">
+					<div class="weatherBg" ng-if="dataFetchedForFirstCity" >
+						<div>{{weatherFirstCity.data.city.name}},{{weatherFirstCity.data.city.country}}</div>
+						<img ng-src="http://openweathermap.org/img/w/{{weatherFirstCity.data.list[0].weather[0].icon}}.png" />
+						<div>{{weatherFirstCity.data.list[0].temp.day}} &#8451;</div>
+						<div>{{weatherFirstCity.data.list[0].weather[0].description}}</div>
+						<div><b>High :</b>{{weatherFirstCity.data.list[0].temp.max}} &#8451;  &nbsp;&nbsp;<b>Low:</b>{{weatherFirstCity.data.list[0].temp.min}} &#8451;</div>
+					</div>
+					</div>
+					<div class="secondCity col-xl-6 col-lg-6 col-sm-6 col-md-6">
+					Enter City  <input type="text" ng-model="secondCityName" ng-change="searchForCityWeather(secondCityName)">
+					<div class="weatherBck" ng-if="dataFetchedForSecondCity">
+						<div>{{weatherSecondCity.data.city.name}},{{weatherSecondCity.data.city.country}}</div>
+						<img ng-src="http://openweathermap.org/img/w/{{weatherSecondCity.data.list[0].weather[0].icon}}.png" />
+						<div>{{weatherSecondCity.data.list[0].temp.day}} &#8451;</div>
+						<div>{{weatherSecondCity.data.list[0].weather[0].description}}</div>
+						<div><b>High :</b>{{weatherSecondCity.data.list[0].temp.max}} &#8451;  &nbsp;&nbsp; <b>Low:</b>{{weatherSecondCity.data.list[0].temp.min}} &#8451;</div>					
+					</div>
+					</div>
+					</div>
+					
+					<div class="marginTopForDiv">
+							<h4> News Feed</h4>
+						</div>
+					<div class="row">	
+					<div class="firstCityNews col-xl-6 col-lg-6 col-sm-6 col-md-6">
+					<div class="newsBg" ng-if="newsAvailableForFirstCity" >
+						<div ng-repeat="news in newsObjectForFirstCity"><ul><b>{{news.newsProvider}}</b><li>{{news.description}}</li></ul></div>
+						
+					</div>
+					<div class="newsBg" ng-if="!newsAvailableForFirstCity" >
+						<div ><b>No news available for this region regarding weather!!!!!</b></div>
+						
+					</div>
+					</div>
+					
+					<div class="secondCityNews col-xl-6 col-lg-6 col-sm-6 col-md-6">
+					<div class="newsBg" ng-if="newsAvailableForSecondCity" >
+						<div ng-repeat="news in newsObjectForSecondCity"><ul><b>{{news.newsProvider}}</b><li>{{news.description}}</li></ul></div>
+						
+					</div>
+					<div class="newsBg" ng-if="!newsAvailableForSecondCity" >
+						<div ><b>No news available for this region regarding weather!!!!!</b></div>
+						
+					</div>
+					</div>
+					</div>
+					<div class="marginTopForDiv">
+						<b><h4>Comparison between the cities</h4></b>
+						<div ng-if="sameCities">
+							<h5><span>{{temperatureComparisonForSameCityMessage}}</span></h5>
+						</div>
+						<div ng-if="!sameCities">
+							<h5><span>{{temperatureComparisonMessage}}&nbsp;{{weatherFirstCity.data.city.name}},{{weatherFirstCity.data.city.country}} &nbsp; is &nbsp; 
+							{{weatherFirstCity.data.list[0].temp.day}} &#8451; &nbsp; while &nbsp;
+							{{weatherSecondCity.data.city.name}},{{weatherSecondCity.data.city.country}} &nbsp;&nbsp; is &nbsp;
+							{{weatherSecondCity.data.list[0].temp.day}} &#8451;,a &nbsp; difference &nbsp; of {{weatherFirstCity.data.list[0].temp.day-weatherSecondCity.data.list[0].temp.day}}&#8451;. </span></h5>
+						</div>
+
+				</div>
+			</div>
+		</div>
+		
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
+  <script src="weather.js"></script>
+</body>
+</html>
