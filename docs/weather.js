@@ -81,7 +81,7 @@ app.controller('WeatherCtrl', function($scope, $http) {
 		
 	//City Weather Function
    $scope.searchForCityWeather= function(cityName) {
-		var URL = 'http://api.openweathermap.org/data/2.5/forecast/daily';
+		var URL = 'https://api.openweathermap.org/data/2.5/forecast/daily';
 		var request = {
 				method: 'GET',
 				url: URL,
